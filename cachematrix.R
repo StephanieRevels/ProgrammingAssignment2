@@ -25,5 +25,13 @@ makeCacheMatrix <- function(x = maxtrix()) {
 ## the cache.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        Inv <- x$getInv()
+        if(!is.null(Inv)) {
+                message("getting cached data")
+                return(Inv)
+        }
+        data <- x$get()
+        Inv <- solve(data, ...)
+        x$setInv(Inv)
+        Inv
 }
